@@ -14,6 +14,7 @@ public class Main {
 	public static void main (String args[]){
 		acceptableAnswers.add("and");
 		acceptableAnswers.add("or");
+		acceptableAnswers.add("exclusive or");
 		boolean badAnswer = true;
 		while(badAnswer){
 			System.out.println("Please input operator");
@@ -38,6 +39,9 @@ public class Main {
 			fillAndResult();
 		else if (operator.equalsIgnoreCase("or"))
 			fillOrResult();
+		else if(operator.equalsIgnoreCase("exclusive or")){
+			fillExOrResult();
+		}
 		for(int i=0;i<rowNum;i++){
 			System.out.println(Arrays.deepToString(mainArray[i]));
 		}
@@ -81,6 +85,26 @@ public class Main {
 						stayInLoop=false;	
 				}
 			}while(stayInLoop);	
+		}
+	}
+	
+	static private void fillExOrResult(){
+		columnPointer = 0;
+		int rowPointer;
+		for (rowPointer=1;rowPointer<rowNum;rowPointer++){
+			int trueCounter = 0;
+				for(columnPointer=0;columnPointer<columnNum-1;columnPointer++){
+					if(mainArray[rowPointer][columnPointer]=="T"){
+						trueCounter++;
+					}
+					
+					if(trueCounter==1){
+						mainArray[rowPointer][columnNum-1]="T";	
+					}
+					else{
+						mainArray[rowPointer][columnNum-1]="F";	
+					}
+				}	
 		}
 	}
 	static private void populateArgumentColumns(){
